@@ -1,30 +1,38 @@
-# React + TypeScript + Vite
+# JSX to PDF - Minimal application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Stack
 
-Currently, two official plugins are available:
+-   React w/ Vite
+-   Express.js
 
--   [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
--   [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Summary
 
-## Expanding the ESLint configuration
+Using JSX to quickly construct static pages and reports, this application uses `ReactDOMServer` to convert static JSX pages into HTML and `puppeteer` (server-side only) to convert that HTML page into a pdf file.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+-   `Vite` is used to provide simple live reloading and bundling for React development
+-   `Express` is used to provide a small API server that will serve the React app (bundled by Vite), handle DB calls, and PDF generation using `puppeteer`.
 
--   Configure the top-level `parserOptions` property like this:
+### Getting started
 
-```js
-export default {
-    // other rules...
-    parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module",
-        project: ["./tsconfig.json", "./tsconfig.node.json"],
-        tsconfigRootDir: __dirname,
-    },
-};
+-   Requires `Node` LTS (v20.10 in 01/2024)
+
+#### Clone the repository
+
+```sh
+git clone https://github.com/spectrum-ian/jsx-to-pdf.git
 ```
 
--   Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
--   Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
--   Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+#### Install dependencies and configure and seed database with data
+
+```
+pnpm install
+npx prisma db push
+npx prisma generate
+npx prisma db seed
+```
+
+#### Run application in dev mode
+
+```
+pnpm dev
+```
